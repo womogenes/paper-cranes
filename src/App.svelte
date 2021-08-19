@@ -1,10 +1,29 @@
 <script>
-  import { money, cranes, cranePrice, demand, paper } from './store.js';
+  import {
+    money,
+    clips,
+    unsoldClips,
+    clipPrice,
+    demand,
+    wire,
+    wirePrice,
+  } from './store.js';
+  import { round } from './utils';
 
-  cranePrice.subscribe((x) => Math.max(x, 0.01));
+  $: $clipPrice = round(Math.max($clipPrice, 0.01), 2);
+  $: $money = round($money, 2);
 
-  const makeCrane = () => {
-    $cranes++;
+  const makeclip = () => {
+    if ($wire <= 0) return;
+    $clips++;
+    $unsoldClips++;
+    $wire--;
+  };
+
+  const buyWire = () => {
+    if ($money < $wirePrice) return;
+    $money -= $wirePrice;
+    $wire += 1000;
   };
 
   const moneyFormatter = Intl.NumberFormat('en-US', {
@@ -14,33 +33,34 @@
 </script>
 
 <div id="root">
-  <h1>Money: {moneyFormatter($money)}</h1>
+  <h1 style="margin-bottom: 20px;">Paperclips: {$clips}</h1>
+
+  <button on:click={makeclip} disabled={$wire <= 0}>Make clip</button><br />
+  <br />
 
   <div id="left-col">
     <b>Business</b>
     <hr />
-    <div class="line">
-      <button on:click={makeCrane}>Make crane</button><br />
-    </div>
-    <div class="line"><span>Inventory: {$cranes}</span><br /></div>
+    <div class="line">Available funds: {moneyFormatter($money)}</div>
+    <div class="line"><span>Inventory: {$unsoldClips}</span><br /></div>
 
     <div class="line">
       <button
         on:click={() => {
-          $cranePrice -= 0.01;
+          $clipPrice -= 0.01;
         }}
       >
         lower
       </button>
       <button
         on:click={() => {
-          $cranePrice += 0.01;
+          $clipPrice += 0.01;
         }}
       >
         raise
       </button>
 
-      <span>Price per crane: {moneyFormatter($cranePrice)}</span><br />
+      <span>Price per clip: {moneyFormatter($clipPrice)}</span><br />
     </div>
 
     <div class="line"><span>Demand: {$demand.toFixed(0)}%</span></div>
@@ -49,7 +69,11 @@
     <hr />
 
     <div class="line">
-      <button>Useless button</button>
+      <button disabled={$money < $wirePrice} on:click={buyWire}> Wire </button>
+      <span>{$wire} inches</span>
+    </div>
+    <div class="line">
+      <span>Cost: {moneyFormatter($wirePrice)}</span>
     </div>
   </div>
 </div>
@@ -70,18 +94,19 @@
   }
 
   button {
-    padding: 2px 6px;
-    margin-right: 5px;
+    padding: 0 6px 1px 6px;
+    margin-right: 8px;
+    border-radius: 5px;
 
     @extend .btn;
     @extend .btn-sm;
-    @extend .btn-secondary;
+    @extend .btn-outline-dark;
   }
 
   .line {
     display: flex;
     align-items: center;
-    margin: 5px 0;
+    margin: 8px 0;
   }
 
   #left-col {
