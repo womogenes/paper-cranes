@@ -1,6 +1,14 @@
 // Round number x to n decimal places
-const round = (x, n) => {
+export const round = (x, n) => {
   return Math.round((x + Number.EPSILON) * Math.pow(10, n)) / Math.pow(10, n);
 };
 
-export { round };
+// Format to money $$$
+export const moneyFormatter = Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+}).format;
+
+export const numberFormatter = (x) => x.toLocaleString();
+
+console.log(numberFormatter(2));

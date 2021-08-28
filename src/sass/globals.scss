@@ -1,0 +1,29 @@
+body {
+  padding: 20px;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+hr {
+  margin: 2px 0 10px 0;
+}
+
+span {
+  line-height: 1em;
+}
+
+@import './classes.scss';
+
+@import './button.scss';
+@import './button-group.scss';
+@import './hr.scss';
+@import './input.scss';
+
+.line {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+#left-col {
+  width: 300px;
+}
