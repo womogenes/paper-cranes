@@ -1,8 +1,8 @@
 <script>
-  import './parts/Business.svelte';
-  import Business from './parts/Business.svelte';
-  import Manufacturing from './parts/Manufacturing.svelte';
-  import Hacks from './parts/Hacks.svelte';
+  import './components/Business.svelte';
+  import Business from './components/Business.svelte';
+  import Manufacturing from './components/Manufacturing.svelte';
+  import Hacks from './components/Hacks.svelte';
 
   import { money, clips, unsoldClips, clipPrice, wire } from './store.js';
 
