@@ -25,7 +25,7 @@
   <button on:click={makeClip} disabled={$wire <= 0}>Make clip</button><br />
   <br />
 
-  <div id="left-col" style="word-break: break-word">
+  <div id="left-col">
     <Business />
     <Manufacturing />
     <Hacks />
@@ -34,4 +34,5 @@
 
 <style lang="scss" global>
   @import './sass/globals.scss';
+  @import './sass/App.scss';
 </style>

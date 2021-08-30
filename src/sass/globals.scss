@@ -11,19 +11,10 @@ span {
   line-height: 1em;
 }
 
-@import './classes.scss';
+@import './components/classes.scss';
 
-@import './button.scss';
-@import './button-group.scss';
-@import './hr.scss';
-@import './input.scss';
-
-.line {
-  display: flex;
-  align-items: center;
-  margin: 8px 0;
-}
-
-#left-col {
-  width: 300px;
-}
+@import './components/button.scss';
+@import './components/button-group.scss';
+@import './components/hr.scss';
+@import './components/input.scss';
+@import './components/table.scss';

@@ -5,20 +5,24 @@
 <div id="hacks">
   <b>Hacks</b>
   <hr />
-  <div class="line">
-    <span>Money: </span><input type="number" bind:value={$money} />
-  </div>
-  <div class="line">
-    <span>Wire: </span><input type="number" bind:value={$wire} />
-  </div>
+  <table>
+    <tr>
+      <th>Variable</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td><span>Money</span></td>
+      <td><input type="number" bind:value={$money} /></td>
+    </tr>
+    <tr>
+      <td><span>Wire</span></td>
+      <td><input type="number" bind:value={$wire} /></td>
+    </tr>
+  </table>
 </div>
 
 <style lang="scss">
   #hacks {
     margin-top: 60px;
-  }
-
-  #hacks > .line > span {
-    margin-right: 0.7rem;
   }
 </style>
